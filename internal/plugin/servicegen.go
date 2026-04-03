@@ -12,16 +12,16 @@ import (
 
 type serviceGenerator struct {
 	pkg        protoreflect.FullName
-	genHandler bool
+	genDefines bool
 	service    protoreflect.ServiceDescriptor
 }
 
 func (s serviceGenerator) Generate(f *codegen.File) error {
 	s.generateInterface(f)
-	if s.genHandler {
+	if s.genDefines {
 		s.generateHandler(f)
+		s.generateBodyEncoder(f)
 	}
-	s.generateBodyEncoder(f)
 	return s.generateClient(f)
 }
 

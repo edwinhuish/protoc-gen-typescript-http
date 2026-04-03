@@ -29,7 +29,7 @@ func (p packageGenerator) Generate(f *codegen.File) error {
 		case protoreflect.EnumDescriptor:
 			enumGenerator{pkg: p.pkg, enum: v}.Generate(f)
 		case protoreflect.ServiceDescriptor:
-			if err := (serviceGenerator{pkg: p.pkg, service: v, genHandler: !seenService}).Generate(f); err != nil {
+			if err := (serviceGenerator{pkg: p.pkg, service: v, genDefines: !seenService}).Generate(f); err != nil {
 				walkErr = err
 				return false
 			}
