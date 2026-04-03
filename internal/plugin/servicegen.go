@@ -21,6 +21,7 @@ func (s serviceGenerator) Generate(f *codegen.File) error {
 	if s.genHandler {
 		s.generateHandler(f)
 	}
+	s.generateBodyEncoder(f)
 	return s.generateClient(f)
 }
 
@@ -51,6 +52,12 @@ func (s serviceGenerator) generateHandler(f *codegen.File) {
 	f.P()
 }
 
+func (s serviceGenerator) generateBodyEncoder(f *codegen.File) {
+	f.P("type BodyEncoder = (body: any) => FormData | string | null;")
+	f.P("const defaultBodyEncoder: BodyEncoder = (body) => body == null ? null : JSON.stringify(body);")
+	f.P()
+}
+
 func (s serviceGenerator) generateClient(f *codegen.File) error {
 	f.P(
 		"export function create",
@@ -58,7 +65,10 @@ func (s serviceGenerator) generateClient(f *codegen.File) error {
 		"Client(",
 		"\n",
 		t(1),
-		"handler: RequestHandler",
+		"handler: RequestHandler,",
+		"\n",
+		t(1),
+		"bodyEncoder = defaultBodyEncoder,",
 		"\n",
 		"): ",
 		descriptorTypeName(s.service),
@@ -164,10 +174,10 @@ func (s serviceGenerator) generateMethodBody(
 	case rule.Body == "":
 		f.P(t(3), "const body = null;")
 	case rule.Body == "*":
-		f.P(t(3), "const body = request;")
+		f.P(t(3), "const body = bodyEncoder(request);")
 	default:
 		nullPath := nullPropagationPath(httprule.FieldPath{rule.Body}, input)
-		f.P(t(3), "const body = request?.", nullPath, " ?? {};")
+		f.P(t(3), "const body = bodyEncoder(request?.", nullPath, " ?? {});")
 	}
 }
 
