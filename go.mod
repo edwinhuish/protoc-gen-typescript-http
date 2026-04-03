@@ -1,4 +1,4 @@
-module github.com/go-kratos/protoc-gen-typescript-http
+module github.com/edwinhuish/protoc-gen-typescript-http
 
 go 1.18
 

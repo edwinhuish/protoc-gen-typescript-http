@@ -13,7 +13,7 @@ For examples of correctly annotated protobuf defintions and the generated code, 
 ### Install the plugin
 
 ```bash
-go install github.com/go-kratos/protoc-gen-typescript-http@latest
+go install github.com/edwinhuish/protoc-gen-typescript-http@latest
 ```
 
 Or download a prebuilt binary from [releases](./releases).
