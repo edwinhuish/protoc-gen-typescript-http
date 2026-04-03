@@ -44,7 +44,7 @@ func (s serviceGenerator) generateHandler(f *codegen.File) {
 	f.P("type RequestType = {")
 	f.P(t(1), "path: string;")
 	f.P(t(1), "method: string;")
-	f.P(t(1), "body: string | null;")
+	f.P(t(1), "body: any | null;")
 	f.P("};")
 	f.P()
 	f.P("type RequestHandler = (request: RequestType, meta: { service: string, method: string }) => Promise<unknown>;")
@@ -164,10 +164,10 @@ func (s serviceGenerator) generateMethodBody(
 	case rule.Body == "":
 		f.P(t(3), "const body = null;")
 	case rule.Body == "*":
-		f.P(t(3), "const body = JSON.stringify(request);")
+		f.P(t(3), "const body = request;")
 	default:
 		nullPath := nullPropagationPath(httprule.FieldPath{rule.Body}, input)
-		f.P(t(3), "const body = JSON.stringify(request?.", nullPath, " ?? {});")
+		f.P(t(3), "const body = request?.", nullPath, " ?? {};")
 	}
 }
 
