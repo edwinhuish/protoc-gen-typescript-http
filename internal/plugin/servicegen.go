@@ -42,18 +42,18 @@ func (s serviceGenerator) generateInterface(f *codegen.File) {
 }
 
 func (s serviceGenerator) generateHandler(f *codegen.File) {
-	f.P("type RequestType = {")
+	f.P("export type RequestType = {")
 	f.P(t(1), "path: string;")
 	f.P(t(1), "method: string;")
-	f.P(t(1), "body: any | null;")
+	f.P(t(1), "body: BodyInit | null | undefined;")
 	f.P("};")
 	f.P()
-	f.P("type RequestHandler = (request: RequestType, meta: { service: string, method: string }) => Promise<unknown>;")
+	f.P("export type RequestHandler = (request: RequestType, meta: { service: string, method: string }) => Promise<unknown>;")
 	f.P()
 }
 
 func (s serviceGenerator) generateBodyEncoder(f *codegen.File) {
-	f.P("type BodyEncoder = (body: any) => FormData | string | null;")
+	f.P("export type BodyEncoder = (body: any) => BodyInit | null | undefined;")
 	f.P("const defaultBodyEncoder: BodyEncoder = (body) => body == null ? null : JSON.stringify(body);")
 	f.P()
 }
