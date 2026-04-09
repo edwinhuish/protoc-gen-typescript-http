@@ -45,7 +45,7 @@ func (s serviceGenerator) generateHandler(f *codegen.File) {
 	f.P("export type RequestType = {")
 	f.P(t(1), "path: string;")
 	f.P(t(1), "method: string;")
-	f.P(t(1), "body: BodyInit | null | undefined;")
+	f.P(t(1), "body: BodyInit | null;")
 	f.P("};")
 	f.P()
 	f.P("export type RequestHandler = (request: RequestType, meta: { service: string, method: string }) => Promise<unknown>;")
@@ -53,7 +53,7 @@ func (s serviceGenerator) generateHandler(f *codegen.File) {
 }
 
 func (s serviceGenerator) generateBodyEncoder(f *codegen.File) {
-	f.P("export type BodyEncoder = (body: any) => BodyInit | null | undefined;")
+	f.P("export type BodyEncoder = (body: any) => BodyInit | null;")
 	f.P("const defaultBodyEncoder: BodyEncoder = (body) => body == null ? null : JSON.stringify(body);")
 	f.P()
 }
