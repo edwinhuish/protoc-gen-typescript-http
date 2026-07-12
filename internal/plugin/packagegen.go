@@ -1,8 +1,8 @@
 package plugin
 
 import (
-	"github.com/go-kratos/protoc-gen-typescript-http/internal/codegen"
-	"github.com/go-kratos/protoc-gen-typescript-http/internal/protowalk"
+	"github.com/edwinhuish/protoc-gen-typescript-http/internal/codegen"
+	"github.com/edwinhuish/protoc-gen-typescript-http/internal/protowalk"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 

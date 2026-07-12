@@ -17,7 +17,7 @@ look at [examples](./examples).
 ### Install the plugin
 
 ```bash
-go install github.com/go-kratos/protoc-gen-typescript-http@latest
+go install github.com/edwinhuish/protoc-gen-typescript-http@latest
 ```
 
 Or download a prebuilt binary from [releases](./releases).

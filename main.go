@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/go-kratos/protoc-gen-typescript-http/internal/plugin"
+	"github.com/edwinhuish/protoc-gen-typescript-http/internal/plugin"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/pluginpb"
 )
