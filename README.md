@@ -158,8 +158,9 @@ library (Axios, Node.js http, etc.):
 import { ClientTransport } from "./gen";
 
 const myTransport: ClientTransport = {
-  unary(path, method, body, meta) {
+  unary(path, method, data, meta) {
     // use your own HTTP client
+    const body = JSON.stringify(data);
     return myHttpClient.request({ url: path, method, body }).then(r => r.json());
   },
   serverStream<T>(path, meta) {

@@ -155,10 +155,10 @@ func generateMethodBody(
 	case rule.Body == "":
 		f.P(t(3), "const body = null;")
 	case rule.Body == "*":
-		f.P(t(3), "const body = JSON.stringify(request);")
+		f.P(t(3), "const body = request;")
 	default:
 		nullPath := nullPropagationPath(httprule.FieldPath{rule.Body}, input)
-		f.P(t(3), "const body = JSON.stringify(request?.", nullPath, " ?? {});")
+		f.P(t(3), "const body = request?.", nullPath, " ?? {};")
 	}
 }
 
